@@ -1,0 +1,16 @@
+<div class="chat-container">
+  <div class="chat-header">
+    <h2>LeoChat</h2>
+  </div>
+  <div class="chat-history">
+    @for (message of messages; track $index) {
+    <div [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'bot'}">
+      <div class="message-content">{{ message.text }}</div>
+    </div>
+    }
+  </div>
+  <div class="chat-input">
+    <textarea [(ngModel)]="userInput" placeholder="Type your message..."></textarea>
+    <button (click)="sendMessage()">Send</button>
+  </div>
+</div>
