@@ -7,12 +7,12 @@ import { Observable } from 'rxjs';
 })
 export class ChatService {
 
-  private apiUrl = 'http://localhost:8002/chat';
+  private apiUrl = 'http://127.0.0.1:8000/chat';
 
   constructor(private http: HttpClient) { }
 
-  getChatResponse(userInput: string): Observable<any> {
-    const body = { user_input: userInput };
+  getChatResponse(userInput: string, context: string): Observable<any> {
+    const body = { user_input: userInput, context: context };
     return this.http.post<any>(this.apiUrl, body);
   }
 }
