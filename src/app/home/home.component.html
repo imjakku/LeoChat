@@ -11,7 +11,7 @@
   </div>
   <div class="chat-input">
     <textarea [(ngModel)]="userInput" placeholder="Message LeoChat"
-      [ngStyle]="{'color': userInput.trim() ? 'black' : '#ececec'}"></textarea>
+      [ngStyle]="{'color': userInput.trim() ? 'black' : '#ececec'}" (keydown.enter)="sendMessage()"></textarea>
     <button (click)="sendMessage()" [disabled]="!userInput.trim()"
       [ngStyle]="{'background-color': userInput.trim() ? 'rgb(23, 19, 19)' : 'rgb(199, 195, 195)'}">
       <div class="svg-circle">
