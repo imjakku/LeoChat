@@ -12,28 +12,30 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  userInput: string = '';
+  userInput: string = "";
   context: string = "";
   messages: { sender: string, text: any }[] = [];
   secondAttribute: any = "";
-  data: string = "";
   isLoading: boolean = false;
+  showInputField: boolean = false;
+  btnvisible: boolean = true;
+  inputError: boolean = false;
 
   constructor(private chatService: ChatService, private spinner: NgxSpinnerService) { }
 
   sendMessage() {
     if (this.userInput.trim()) {
-      this.userInput = this.userInput.replace(/[\r\n]+$/, '').trim();
-      this.data = this.userInput;
-      this.messages.push({ sender: 'user', text: this.data });
-      this.userInput = '';
       this.isLoading = true;
+      this.userInput = this.userInput.replace(/[\r\n]+$/, '').trim();
+      this.messages.push({ sender: "user", text: this.userInput });
+      this.userInput = "";
+
       this.spinner.show();
-      this.chatService.getChatResponse(this.data, this.context).subscribe(response => {
+      this.chatService.getChatResponse(this.userInput, this.context).subscribe(response => {
         const responseKeys = Object.keys(response);
         this.secondAttribute = response[responseKeys[1]];
         console.log("Second attribute: ", this.secondAttribute);
-        this.messages.push({ sender: 'bot', text: this.secondAttribute });
+        this.messages.push({ sender: "bot", text: this.secondAttribute });
         this.isLoading = false;
         this.spinner.hide();
       },
@@ -42,6 +44,27 @@ export class HomeComponent {
           this.spinner.hide();
         });
       console.log(this.messages);
+    }
+  }
+  toggleInputField() {
+    this.showInputField = !this.showInputField;
+  }
+
+  public visible = false;
+  public inputValue: string = '';
+
+  toggleLiveDemo() {
+    console.log("hfce");
+    this.visible = !this.visible;
+  }
+  handleSubmit() {
+    console.log('Input Value:', this.inputValue);
+    if (this.inputValue === "abc-def-ghi") {
+      this.toggleLiveDemo();
+    } else {
+      this.inputError = true;
+      setTimeout(() => this.inputError = false, 500);
+
     }
   }
 }

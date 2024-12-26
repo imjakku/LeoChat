@@ -1,7 +1,11 @@
 <div class="chat-container">
   <div class="chat-header">
     <h2>LeoChat</h2>
+    @if(btnvisible){
+    <button class="modal-btn" (click)="toggleLiveDemo()"><img src="../../assets/image/access-svgrepo-com.svg"
+        alt="SVG Image" (click)="toggleInputField()"></button>}
   </div>
+
   <div class="chat-history">
     @for (message of messages; track $index) {
     <div [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'bot'}">
@@ -24,12 +28,36 @@
     </button>
   </div>
 </div>
-<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff">
   <div class="spinner-content">
     <div class="spinner-icon"></div>
     <p>Generating<span class="blinking-dots"><span>.</span><span>.</span><span>.</span></span></p>
   </div>
 </ngx-spinner>
+
+@if(visible){
+<div id="liveDemoModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-heading">Welcome to Authentication</h5>
+      <button (click)="toggleLiveDemo()" class="close-button">&times;</button>
+    </div>
+    <div class="modal-body">
+      <img class="img-verfication" height="100px" src="../../assets/image/profile-authentication.png" alt="">
+      <p>Please Verify Valid Key</p>
+      <input (keydown.enter)="handleSubmit()" class="modal-input" type="text" [(ngModel)]="inputValue"
+        placeholder="XXX XXXX XXX" [ngClass]="{'shake': inputError, 'error-border': inputError}">
+    </div>
+    <div class="modal-footer">
+      <div></div>
+      <button (click)="handleSubmit()" class="button-primary">Submit</button>
+    </div>
+  </div>
+</div>
+}
+
+
 <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-md-heavy">
   <path fill-rule="evenodd" clip-rule="evenodd"
     d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z"
