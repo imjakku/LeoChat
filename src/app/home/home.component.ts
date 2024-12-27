@@ -13,6 +13,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 })
 export class HomeComponent {
   userInput: string = "";
+  data: string = "";
   context: string = "";
   messages: { sender: string, text: any }[] = [];
   secondAttribute: any = "";
@@ -27,11 +28,11 @@ export class HomeComponent {
     if (this.userInput.trim()) {
       this.isLoading = true;
       this.userInput = this.userInput.replace(/[\r\n]+$/, '').trim();
+      this.data = this.userInput;
       this.messages.push({ sender: "user", text: this.userInput });
       this.userInput = "";
-
       this.spinner.show();
-      this.chatService.getChatResponse(this.userInput, this.context).subscribe(response => {
+      this.chatService.getChatResponse(this.data, this.context).subscribe(response => {
         const responseKeys = Object.keys(response);
         this.secondAttribute = response[responseKeys[1]];
         console.log("Second attribute: ", this.secondAttribute);
