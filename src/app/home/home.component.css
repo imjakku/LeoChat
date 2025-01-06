@@ -7,7 +7,6 @@
 
 body {
   background-color: #f0f2f5;
-  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,11 +49,6 @@ body {
   margin-right: 60px;
 }
 
-/* .chat-history .user-message::before {
-  content: 'Hello';
-  position: relative;
-  left: -50px;
-} */
 
 .chat-history .bot-message {
   max-width: 60%;
@@ -63,7 +57,6 @@ body {
   margin-left: 60px;
   clear: both;
   white-space: pre-wrap;
-
 }
 
 .message-content {
@@ -303,4 +296,10 @@ body {
 
 .error-border {
   background-color: rgb(244, 145, 145);
+}
+
+.modal-btn-doc {
+  height: 40px;
+  width: 40px;
+  background-color: #fff;
 }

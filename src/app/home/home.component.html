@@ -3,7 +3,13 @@
     <h2>LeoChat</h2>
     @if(btnvisible){
     <button class="modal-btn" (click)="toggleLiveDemo()"><img src="../../assets/image/access-svgrepo-com.svg"
-        alt="SVG Image" (click)="toggleInputField()"></button>}
+        alt="SVG Image"></button>
+    }
+    @else{
+    <button (click)="fileInput.click()"><img class="modal-btn-doc" src="../../assets/image/file.png"
+        alt="SVG Image"></button>
+    <input type="file" #fileInput accept=".pdf" style="display: none;" (change)="onFileSelected($event)">
+    }
   </div>
 
   <div class="chat-history">
@@ -13,6 +19,7 @@
     </div>
     }
   </div>
+
   <div class="chat-input">
     <textarea [(ngModel)]="userInput" placeholder="Message LeoChat" (keydown.enter)="sendMessage()"
       [disabled]="isLoading"></textarea>

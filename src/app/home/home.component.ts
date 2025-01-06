@@ -47,25 +47,36 @@ export class HomeComponent {
       console.log(this.messages);
     }
   }
-  toggleInputField() {
-    this.showInputField = !this.showInputField;
-  }
+  // toggleInputField() {
+  //   this.showInputField = !this.showInputField;
+  // }
 
   public visible = false;
   public inputValue: string = '';
 
   toggleLiveDemo() {
-    console.log("hfce");
     this.visible = !this.visible;
   }
   handleSubmit() {
     console.log('Input Value:', this.inputValue);
-    if (this.inputValue === "abc-def-ghi") {
+    if (this.inputValue === "a") {
+      this.btnvisible = false;
       this.toggleLiveDemo();
     } else {
       this.inputError = true;
       setTimeout(() => this.inputError = false, 500);
 
+    }
+  }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      console.log('Selected file:', file);
+
+
+      // Handle the file upload logic here
     }
   }
 }
