@@ -29,7 +29,7 @@ export class HomeComponent {
 
   @HostListener('window:scroll')
   onWindowScroll() {
-    this.showBottomButton = ((window.document.body.scrollHeight - window.innerHeight) - window.scrollY) > 50;
+    this.showBottomButton = ((window.document.body.scrollHeight - window.innerHeight) - window.scrollY) > 40;
   }
 
 
