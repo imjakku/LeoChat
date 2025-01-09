@@ -1,5 +1,5 @@
 import { CommonModule, NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ChatService } from '../chat.service';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
@@ -12,6 +12,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+
   userInput: string = "";
   data: string = "";
   context: string = "";
@@ -21,8 +22,16 @@ export class HomeComponent {
   showInputField: boolean = false;
   btnvisible: boolean = true;
   inputError: boolean = false;
+  showBottomButton: boolean = false;
 
   constructor(private chatService: ChatService, private spinner: NgxSpinnerService) { }
+
+
+  @HostListener('window:scroll')
+  onWindowScroll() {
+    this.showBottomButton = ((window.document.body.scrollHeight - window.innerHeight) - window.scrollY) > 350;
+  }
+
 
   sendMessage() {
     if (this.userInput.trim()) {
@@ -45,12 +54,9 @@ export class HomeComponent {
           this.spinner.hide();
         });
       console.log(this.messages);
+
     }
   }
-  // toggleInputField() {
-  //   this.showInputField = !this.showInputField;
-  // }
-
   public visible = false;
   public inputValue: string = '';
 
@@ -78,5 +84,9 @@ export class HomeComponent {
 
       // Handle the file upload logic here
     }
+  }
+
+  scrollToBottom() {
+    window.scrollTo({ top: window.document.body.scrollHeight - window.innerHeight, behavior: 'smooth' });
   }
 }

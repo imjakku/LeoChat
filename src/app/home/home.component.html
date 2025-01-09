@@ -1,5 +1,7 @@
 <div class="chat-container">
+
   <div class="chat-header">
+
     <h2>LeoChat</h2>
     @if(btnvisible){
     <button class="modal-btn" (click)="toggleLiveDemo()"><img src="../../assets/image/access-svgrepo-com.svg"
@@ -21,6 +23,14 @@
   </div>
 
   <div class="chat-input">
+    <div class="btn-down">
+      @if(showBottomButton){
+      <button class="go-to-bottom" (click)="scrollToBottom()">
+        <img class="btn-down" src="../../assets/image/down-arrow.png" alt="">
+      </button>
+      }
+    </div>
+
     <textarea [(ngModel)]="userInput" placeholder="Message LeoChat" (keydown.enter)="sendMessage()"
       [disabled]="isLoading"></textarea>
     <button (click)="sendMessage()" [disabled]="!userInput.trim() || isLoading"
@@ -35,6 +45,7 @@
     </button>
   </div>
 </div>
+
 
 <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff">
   <div class="spinner-content">
@@ -53,7 +64,7 @@
     <div class="modal-body">
       <img class="img-verfication" height="100px" src="../../assets/image/profile-authentication.png" alt="">
       <p>Please Verify Valid Key</p>
-      <input (keydown.enter)="handleSubmit()" class="modal-input" type="text" [(ngModel)]="inputValue"
+      <input (keydown.enter)="handleSubmit()" class="modal-input" type="password" [(ngModel)]="inputValue"
         placeholder="XXX XXXX XXX" [ngClass]="{'shake': inputError, 'error-border': inputError}">
     </div>
     <div class="modal-footer">
@@ -62,6 +73,7 @@
     </div>
   </div>
 </div>
+
 }
 
 
