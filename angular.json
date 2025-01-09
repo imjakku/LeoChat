@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/chatgpt",
+            "outputPath": "dist/LeoChat",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -56,10 +56,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "chatgpt:build:production"
+              "buildTarget": "LeoChat:build:production"
             },
             "development": {
-              "buildTarget": "chatgpt:build:development"
+              "buildTarget": "LeoChat:build:development"
             }
           },
           "defaultConfiguration": "development"
