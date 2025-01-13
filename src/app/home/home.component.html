@@ -1,7 +1,5 @@
 <div class="chat-container">
-
   <div class="chat-header">
-
     <h2>LeoChat</h2>
     @if(btnvisible){
     <button class="modal-btn" (click)="toggleLiveDemo()"><img src="../../assets/image/access-svgrepo-com.svg"
@@ -16,17 +14,55 @@
 
   <div class="chat-history">
     @for (message of messages; track $index) {
-    <div [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'bot'}">
-      <div>{{ message.text }} </div>
+    <div
+      [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'bot' , 'error-bot' :message.sender === 'error'}">
+      <div>
+        <div>
+          @if(message.sender != 'user' ){
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#5D5D5D" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M5 3V7M3 5H7M6 17V21M4 19H8M13 3L15.2857 9.85714L21 12L15.2857 14.1429L13 21L10.7143 14.1429L5 12L10.7143 9.85714L13 3Z"
+              stroke="#5D5D5D" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            </path>
+          </svg>
+          }
+          {{ message.text }}
+        </div>
+      </div>
+      <!-- @if(errorIcon && message.sender == 'error'){
+
+      <div class="error-icon">
+        <div class="error-svg">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+            class="icon-lg shrink-0">
+            <path
+              d="M13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12V16C11 16.5523 11.4477 17 12 17C12.5523 17 13 16.5523 13 16V12Z"
+              fill="red"></path>
+            <path
+              d="M12 9.5C12.6904 9.5 13.25 8.94036 13.25 8.25C13.25 7.55964 12.6904 7 12 7C11.3096 7 10.75 7.55964 10.75 8.25C10.75 8.94036 11.3096 9.5 12 9.5Z"
+              fill="red"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12Z"
+              fill="red"></path>
+          </svg>
+        </div>
+         <div>
+       <p>An error occurred. Either the engine you requested does not exist or there was another issue processing
+            your request. If this issue persists please contact us through our help center at <a
+              href="https://www.motherson.com/" rel="noopener noreferrer" target="_new">motherson.com</a>.</p>
+        </div> -->
+      <!-- </div> -->
+      <!-- } -->
     </div>
     }
   </div>
+
 
   <div class="chat-input">
     <div class="btn-down">
       @if(showBottomButton){
       <button class="go-to-bottom" (click)="scrollToBottom()">
-        <img class="btn-down" src="../../assets/image/down-arrow.png" alt="">
+        <img class="btn-down" src="../../assets/image/Scroll.svg" alt="">
       </button>
       }
     </div>

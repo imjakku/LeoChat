@@ -12,7 +12,6 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
   userInput: string = "";
   data: string = "";
   context: string = "";
@@ -23,15 +22,13 @@ export class HomeComponent {
   btnvisible: boolean = true;
   inputError: boolean = false;
   showBottomButton: boolean = false;
-
+  errorIcon: boolean = false;
   constructor(private chatService: ChatService, private spinner: NgxSpinnerService) { }
-
 
   @HostListener('window:scroll')
   onWindowScroll() {
     this.showBottomButton = ((window.document.body.scrollHeight - window.innerHeight) - window.scrollY) > 40;
   }
-
 
   sendMessage() {
     if (this.userInput.trim()) {
@@ -41,20 +38,25 @@ export class HomeComponent {
       this.messages.push({ sender: "user", text: this.userInput });
       this.userInput = "";
       this.spinner.show();
+
       this.chatService.getChatResponse(this.data, this.context).subscribe(response => {
         const responseKeys = Object.keys(response);
         this.secondAttribute = response[responseKeys[1]];
         console.log("Second attribute: ", this.secondAttribute);
         this.messages.push({ sender: "bot", text: this.secondAttribute });
+        this.errorIcon = false;
         this.isLoading = false;
         this.spinner.hide();
       },
         err => {
+          this.secondAttribute = "An error occurred. Either the engine you requested does not exist or there was another issue processing your request.";
+          this.messages.push({ sender: "error", text: this.secondAttribute });
+          this.errorIcon = true;
           this.isLoading = false;
           this.spinner.hide();
+          console.log("Error");
         });
       console.log(this.messages);
-
     }
   }
   public visible = false;
@@ -71,7 +73,6 @@ export class HomeComponent {
     } else {
       this.inputError = true;
       setTimeout(() => this.inputError = false, 500);
-
     }
   }
 

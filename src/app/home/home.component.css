@@ -34,9 +34,13 @@ body {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+  position: fixed;
+  
+  margin-top: -10px;
 }
 
 .chat-history {
+  margin-top: 90px;
   margin-bottom: 100px;
   background-color: #ffffff;
 }
@@ -322,4 +326,25 @@ body {
 .go-to-bottom {
   height: 30px;
   width: 30px;
+}
+
+.error-bot {
+  background-color: rgb(255, 215, 215);
+  margin-right: 10%;
+  border-radius: 12px;
+  padding: 23px;
+  line-height: 1.3rem;
+  font-size: 1rem;
+  /* border: 1px solid #f93a37; */
+  clear: both;
+  margin-bottom: 12px;
+  margin-left: 10%;
+}
+
+.error-icon {
+  display: flex;
+}
+
+.error-svg {
+  padding-right: 10px;
 }
